@@ -23,4 +23,5 @@ TilemapPlayer="*res://src/levels/TilemapPlayer.gd"
 
 [display]
 
+window/size/viewport_width=896
 window/size/viewport_height=640
