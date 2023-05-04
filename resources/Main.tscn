@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkl12043rytep"]
+
+[ext_resource type="Script" path="res://src/main/Main.gd" id="1_lqir1"]
+[ext_resource type="Script" path="res://src/canvasLayerTileMap/CanvasLayerTileMap.gd" id="2_maiyt"]
+[ext_resource type="Texture2D" uid="uid://xfiube5f8mh6" path="res://assets/player.png" id="3_pxagf"]
+[ext_resource type="Script" path="res://src/player/PlayerSprite2D.gd" id="4_gwta5"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_lqir1")
+
+[node name="CanvasLayerBackground" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayerTileMap" type="CanvasLayer" parent="."]
+script = ExtResource("2_maiyt")
+
+[node name="CanvasLayerPlayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerSprite2D" type="Sprite2D" parent="CanvasLayerPlayer"]
+position = Vector2(268, 220)
+texture = ExtResource("3_pxagf")
+hframes = 4
+vframes = 4
+script = ExtResource("4_gwta5")
+metadata/map_position = ""
+
+[node name="CanvasLayerPanel" type="CanvasLayer" parent="."]

@@ -1,0 +1,26 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="SampleTileMapGame"
+run/main_scene="res://resources/Main.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameConstants="*res://src/commons/GameConstants.gd"
+Commons="*res://src/commons/Commons.gd"
+TilemapPlayer="*res://src/levels/TilemapPlayer.gd"
+
+[display]
+
+window/size/viewport_height=640
