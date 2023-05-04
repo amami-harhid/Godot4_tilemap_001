@@ -71,6 +71,11 @@ func _can_move(_dir:Vector2i)->bool:
 # 『ドア』に入ったらレベルクリア！
 # 必要に応じて継承先でオーバーライドすること
 func _is_game_clear():
+	# 「ドアに入った」判定を１回だけ行うため
+	# タイルマップが表示されているときだけ
+	# ゲームクリア判定をする
+	if not canvasLayerTilemap.visible :
+		return false
 	# 現在位置のタイルを取得する
 	var _pos:Vector2i = player.get_map_position()
 	var _tiledata:TileData = get_tile_data(_pos)

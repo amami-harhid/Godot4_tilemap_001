@@ -45,6 +45,7 @@ func _load_game():
 		
 	# Level(Node2D)を読み込む
 	var _level_path = Path_Level_Tscn%_level # %02d を数字に置換
+	print(_level_path)
 	var _level_res = load(_level_path)
 	# インスタンスを作成
 	var _level_obj = _level_res.instantiate()
