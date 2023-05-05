@@ -11,12 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://bdl83nfcvhfe7" path="res://assets/buttons.png" id="9_26oop"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5clte"]
+resource_name = "Wall"
 texture = ExtResource("1_qgppw")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/custom_data_0 = "Wall"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wjvwd"]
+resource_name = "Arrows"
 texture = ExtResource("2_tdrkn")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -25,63 +27,74 @@ texture_region_size = Vector2i(64, 64)
 3:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5elpw"]
+resource_name = "Teleports"
 texture = ExtResource("3_pognh")
 texture_region_size = Vector2i(64, 64)
+0:0/next_alternative_id = 3
 0:0/0 = 0
+0:0/0/custom_data_0 = "Teleport"
+0:0/1 = 1
+0:0/1/custom_data_0 = "Teleport_1"
+0:0/2 = 2
+0:0/2/modulate = Color(1, 0, 1, 1)
+0:0/2/custom_data_0 = "Teleport_2"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_voni0"]
+resource_name = "Door"
 texture = ExtResource("4_uglan")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/custom_data_0 = "Door"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m8uvd"]
+resource_name = "Lever"
 texture = ExtResource("5_cyhey")
 texture_region_size = Vector2i(64, 64)
+0:0/next_alternative_id = 4
 0:0/0 = 0
+0:0/0/custom_data_0 = "Lever_Off"
+1:0/next_alternative_id = 2
 1:0/0 = 0
+1:0/0/custom_data_0 = "Lever_On"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b88bg"]
+resource_name = "Marks"
 texture = ExtResource("6_46hio")
-texture_region_size = Vector2i(64, 64)
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-1:0/0 = 0
+0:0/0/custom_data_0 = "Mark_Circle_W"
 2:0/0 = 0
-3:0/0 = 0
+2:0/0/custom_data_0 = "Mark_Cone_W"
+4:0/0 = 0
+6:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bubsn"]
+resource_name = "Cage"
 texture = ExtResource("7_j2tf0")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2je6"]
+resource_name = "Boxes"
 texture = ExtResource("8_70ny8")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
+0:0/0/custom_data_0 = "Box_Brown"
 1:0/0 = 0
-0:1/0 = 0
+1:0/0/custom_data_0 = "Box_Red"
 1:1/0 = 0
+1:1/0/custom_data_0 = "Box_Green"
+0:1/0 = 0
+0:1/0/custom_data_0 = "Box_Blue"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_savxx"]
 resource_name = "Buttons"
 texture = ExtResource("9_26oop")
 texture_region_size = Vector2i(64, 64)
-0:2/0 = 0
-0:2/0/custom_data_0 = "Button03"
-1:4/0 = 0
-0:0/0 = 0
-0:0/0/custom_data_0 = "Button00"
 1:0/0 = 0
-1:0/0/custom_data_0 = "Button10"
-1:1/0 = 0
-0:1/0 = 0
-0:1/0/custom_data_0 = "Button11"
-1:2/0 = 0
-1:3/0 = 0
-0:3/0 = 0
-0:4/0 = 0
-0:5/0 = 0
-1:5/0 = 0
+1:0/0/custom_data_0 = "Button_On"
+0:0/0 = 0
+0:0/0/custom_data_0 = "Button_Off"
 
 [resource]
 tile_size = Vector2i(64, 64)

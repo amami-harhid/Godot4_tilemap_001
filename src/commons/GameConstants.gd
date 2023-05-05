@@ -41,21 +41,32 @@ const Layer_Data_Kind : int = 0
 # カスタムデータ(タイル種別)
 # (注意事項) 
 # Tileのカスタムデータ(1番目)には下記の文字列を設定すること！
-const Wall         := 'Wall'
-const Arrow_Right  := 'Arrow_Right'
-const Arrow_Left   := 'Arrow_Left'
-const Arrow_Up     := 'Arrow_Up'
-const Arrow_Down   := 'Arrow_Down'
-const Teleport     := 'Teleport'
-const Door         := 'Door'
-const Lever_Off    := 'Lever_Off'
-const Lever_On     := 'Lever_On'
-const Lever_Off_1  := 'Lever_Off_1'
-const Lever_Off_2  := 'Lever_Off_2'
+const Wall          := 'Wall'
+const Arrow_Right   := 'Arrow_Right'
+const Arrow_Left    := 'Arrow_Left'
+const Arrow_Up      := 'Arrow_Up'
+const Arrow_Down    := 'Arrow_Down'
+const Teleport_1    := 'Teleport_1'
+const Teleport_2    := 'Teleport_2'
+const Door          := 'Door'
+const Lever_Off     := 'Lever_Off'
+const Lever_On      := 'Lever_On'
+const Mark_Circle_W := 'Mark_Circle_W'
+const Mark_Cone_W   := 'Mark_Cone_W'
+const Mark_Circle_R := 'Mark_Circle_R'
+const Mark_Cone_R   := 'Mark_Cone_R'
+const Cage          := 'Cage'
+const Box_Brown     := 'Box_Brown'
+const Box_Red       := 'Box_Red'
+const Box_Blue      := 'Box_Blue'
+const Box_Green     := 'Box_Green'
+const Button_On     := 'Button_On'
+const Button_Off    := 'Button_Off'
 
 # カスタムデータ先頭の目印
-const Arrow := 'Arrow'
-const Lever := 'Lever'
+const Arrow    := 'Arrow'
+const Lever    := 'Lever'
+const Teleport := 'Teleport'
 
 
 # ソースID
@@ -71,53 +82,38 @@ const Source_Id_Cages     := 6  # かご(小屋)
 const Source_Id_Boxes     := 7  # 箱
 const Source_Id_Buttons   := 8  # ボタン
 
-# Atras_Coords Key
-# - Atras_Coords 連想配列のキーとして使うもの（値はユニークにすること）
-enum Atras_Coords_Key {
-	Wall = 0,
-	Arrow_Right = 1,
-	Arrow_Up = 2,
-	Arrow_Down = 3,
-	Arrow_Left = 4,
-	Teleport = 5,
-	Door = 6,
-	Lever_Off = 7,
-	Lever_On = 8,
-	Marks_Circle_W = 9,
-	Marks_Cone_W = 10,
-	Marks_Circle_R = 11,
-	Marks_Cone_R = 12,
-}
 # Atras_Coords 連想配列
 # (注意事項) 
 # TileSetへソースを追加したときの Atras Coordsを転機すること
 # 使いそうなものだけを転機すればよい。全部を書くのは大変だからね。
 const Atras_Coords = {
-	Atras_Coords_Key.Arrow_Right    : Vector2i(0,0), # 右向き矢印
-	Atras_Coords_Key.Arrow_Up       : Vector2i(1,0), # 上向き矢印
-	Atras_Coords_Key.Arrow_Down     : Vector2i(2,0), # 下向き矢印
-	Atras_Coords_Key.Arrow_Left     : Vector2i(3,0), # 左向き矢印
-	Atras_Coords_Key.Teleport       : Vector2i(0,0), # テレポート
-	Atras_Coords_Key.Door           : Vector2i(0,0), # ドア
-	Atras_Coords_Key.Lever_Off      : Vector2i(0,0), # レバーOFF
-	Atras_Coords_Key.Lever_On       : Vector2i(1,0), # レバーON
-	Atras_Coords_Key.Marks_Circle_W : Vector2i(0,0), # 円のマーク白
-	Atras_Coords_Key.Marks_Cone_W   : Vector2i(2,0), # 円錐のマーク白
-	Atras_Coords_Key.Marks_Circle_R : Vector2i(4,0), # 円のマーク赤
-	Atras_Coords_Key.Marks_Cone_R   : Vector2i(6,0), # 円錐のマーク赤
+	Wall           : Vector2i(0,0), # 壁
+	Arrow_Right    : Vector2i(0,0), # 右向き矢印
+	Arrow_Up       : Vector2i(1,0), # 上向き矢印
+	Arrow_Down     : Vector2i(2,0), # 下向き矢印
+	Arrow_Left     : Vector2i(3,0), # 左向き矢印
+	Teleport       : Vector2i(0,0), # テレポート
+	Door           : Vector2i(0,0), # ドア
+	Lever_Off      : Vector2i(0,0), # レバーOFF
+	Lever_On       : Vector2i(1,0), # レバーON
+	Mark_Circle_W  : Vector2i(0,0), # 円のマーク白
+	Mark_Cone_W    : Vector2i(2,0), # 円錐のマーク白
+	Mark_Circle_R  : Vector2i(4,0), # 円のマーク赤
+	Mark_Cone_R    : Vector2i(6,0), # 円錐のマーク赤
+	Cage           : Vector2i(0,0), # かご
+	Box_Brown      : Vector2i(0,0), # 箱(茶色)
+	Box_Red        : Vector2i(1,0), # 箱(赤色)
+	Box_Blue       : Vector2i(0,1), # 箱(青色)
+	Box_Green      : Vector2i(1,1), # 箱(緑色)
+	Button_Off     : Vector2i(0,0), # ボタンOff
+	Button_On      : Vector2i(1,0), # ボタンON
 }
 
-# Alternative Tile Key
-# - Alternative Tile 連想配列のキーとして使うもの（値はユニークにすること）
-enum Alternative_Tiles_Key {
-	Teleport_1 = 0,
-	Teleport_2 = 1,
-}
 # Alternative Tile 連想配列
 # (注意事項) 
 # TileSetへソースを追加したときの Alternative Tile の番号を転機すること
 # 使いそうなものだけを転機すればよい。全部を書くのは大変だからね。
 const Alternative_Tiles = {
-	Alternative_Tiles_Key.Teleport_1 : 1,
-	Alternative_Tiles_Key.Teleport_2 : 2,
+	Teleport_1 : 1,
+	Teleport_2 : 2,
 }

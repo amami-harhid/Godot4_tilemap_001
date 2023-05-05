@@ -31,6 +31,29 @@ func _can_move(_dir:Vector2i)->bool:
 				return true
 	return false
 
+var _lever_off := false
+# 変化させるタイルの条件
+func _is_changing_tile()->bool:
+	_lever_off = false
+	var _pos:Vector2i = player.get_map_position()
+	var _tiledata:TileData = Commons.get_tile_data(self,_pos)
+	if _tiledata:
+		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
+		if Commons.find_str(_tile_kind, GameConstants.Lever_Off)==0:
+			_lever_off = true
+			return true
+	return false
+
+func _change():
+	if _lever_off:
+		var _pos:Vector2i = player.get_map_position()
+		var _lever_on := GameConstants.Lever_On
+		var _altras = GameConstants.Atras_Coords
+		Commons.replace_cell(self, _pos, GameConstants.Source_Id_Levers, _altras.get(_lever_on))
+		var _door_pos := Vector2i(1,1)
+		var _door := GameConstants.Door
+		Commons.set_cell(self,_door_pos, GameConstants.Source_Id_Door, _altras.get(_door))
+	pass
 # Playerがいるタイルは抜け出せるか
 func _can_escape_from_current_tile(_pos:Vector2i)->bool:
 	return true
@@ -42,6 +65,7 @@ func _can_enter_to_next_position(_next_pos:Vector2i)->bool:
 	if _tiledata :
 		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
 		if _tile_kind == GameConstants.Wall:
+			# 『壁』には入れない。
 			return false
 
 	return true
