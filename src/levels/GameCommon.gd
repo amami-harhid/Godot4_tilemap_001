@@ -1,10 +1,34 @@
-extends CommonTileMap
+extends TileMap
+
+#===================================
+# GameNN.gd の親クラス
+#===================================
 
 class_name GameCommon
 
 @onready var canvasLayerTilemap:CanvasLayerTileMapCommon = get_node('../../../CanvasLayerTileMap')
 @onready var player:Sprite2D = get_node('../../../CanvasLayerPlayer/PlayerSprite2D')
 
+# Playerの初期処理
+func _player_initialize():
+	player.set_map_position(_get_init_position())
+	# Playerが持つ位置情報の位置へと移動する
+	player.start_animation(_get_animation_wait_time())
+	# Playerが持つ位置情報の位置へと移動する
+	_move()
+
+# 継承先でオーバーライドすること
+# Playerの初期位置
+func _get_init_position()->Vector2i:
+	return Vector2i(-1,-1)
+	
+# 継承先でオーバーライドすること
+# Playerのアニメーション間隔（秒）
+func _get_animation_wait_time()->float:
+	return 10
+
+# Playerを操作するメソッド
+# GameSceneのTileMap(=game)の_process() で呼び出すこと
 func _process_player():
 	if Input.is_action_just_pressed("ui_up"):
 		_move_up()
@@ -19,17 +43,24 @@ func _process_player():
 		_move_down()
 		player.animation_down()
 	else:
-		_move()
+		pass
 
+	# ゲームレベルクリア条件を満たしたか？	
+	# -- ゲームレベルクリア条件は、継承先で変更できる	
 	if _is_game_clear():
 		canvasLayerTilemap.level_up()
 		canvasLayerTilemap.load_game()
+	else:
+		# テレポートをさせるタイルの上にプレイヤーがいるか？
+		if _is_teleportation_tile():
+			# テレポートの条件、テレポートの内容は継承先で定義する
+			_teleport()
 
-	if _is_change():
-		_change()
-
-	if _is_teleport():
-		_teleport()
+		# 他のタイルの変更を起こすタイルの上にプレイヤーがいるか？
+		if _is_changing_tile():
+			# ゲームに応じて変化をさせる
+			# 変化起因の条件、変化の内容は継承先で定義する
+			_change()
 
 
 # 右に進めるなら右に進む
@@ -78,25 +109,34 @@ func _is_game_clear():
 		return false
 	# 現在位置のタイルを取得する
 	var _pos:Vector2i = player.get_map_position()
-	var _tiledata:TileData = get_tile_data(_pos)
+	var _tiledata:TileData = Commons.get_tile_data(self,_pos)
 	if _tiledata :
-		var _tile_kind:String = get_tile_data_kind(_tiledata)
+		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
 		if _tile_kind == GameConstants.Door:
 			# ドアに入った
 			return true
 
 	return false
 
-func _is_change()->bool:
+# 必要に応じて継承先でオーバーライドすること
+# 他のタイルの変更を起こすタイルの上にプレイヤーがいるとき Trueを返す
+func _is_changing_tile()->bool:
+	# デフォルトはfalse
 	return false
 
+# 必要に応じて継承先でオーバーライドすること
 func _change():
+	# デフォルトは何もしない
 	pass
 
-# 継承先でオーバーライドすること
-func _is_teleport()->bool:
+# 必要に応じて継承先でオーバーライドすること
+# Playerがテレポートをする種類のタイルにいるとき Trueを返す
+func _is_teleportation_tile()->bool:
+	# デフォルトはfalse
 	return false
 
 # 継承先でオーバーライドすること
+# Playerにテレポートをさせる
 func _teleport():
+	# デフォルトは何もしない
 	pass

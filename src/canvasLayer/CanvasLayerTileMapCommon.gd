@@ -2,12 +2,13 @@ extends CanvasLayer
 
 class_name CanvasLayerTileMapCommon
 
+# プレイヤーCanvasレイヤー
 @onready var canvasLayerPlayer:CanvasLayer = get_node('../CanvasLayerPlayer')
 
 enum Game_Level {
-	Game_Level_Undefined = -1,
-	Game_Level_First = 1,
-	Game_Level_Final = 3,
+	Game_Level_Undefined = -1, # ゲームレベル未設定
+	Game_Level_First = 1, # 最初のゲームレベル
+	Game_Level_Final = 3, # 最後のゲームレベル
 }
 
 var _level:Game_Level = Game_Level.Game_Level_Undefined
@@ -45,7 +46,6 @@ func _load_game():
 		
 	# Level(Node2D)を読み込む
 	var _level_path = Path_Level_Tscn%_level # %02d を数字に置換
-	print(_level_path)
 	var _level_res = load(_level_path)
 	# インスタンスを作成
 	var _level_obj = _level_res.instantiate()

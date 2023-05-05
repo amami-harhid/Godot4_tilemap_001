@@ -1,8 +1,10 @@
 extends Node
 
-#--------------------------
-# TileMapとPlayerを使った操作
-#--------------------------
+#----------------------------------------------
+# TilemapPlayer.gd
+#
+# TileMapとPlayerを使った操作をここにまとめる
+#----------------------------------------------
 
 # Playerが指定した方向へ進めるか
 func can_move(_tilemap:TileMap,_player:Sprite2D,_dir:Vector2i)->bool:

@@ -1,5 +1,9 @@
 extends Node2D
 
+#===================================
+# Main.gd の親クラス
+#===================================
+
 class_name CommonMain
 
 @onready var canvasLayerTilemap:CanvasLayerTileMapCommon = $CanvasLayerTileMap
