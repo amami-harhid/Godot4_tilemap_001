@@ -50,6 +50,8 @@ const Teleport_1    := 'Teleport_1'
 const Teleport_2    := 'Teleport_2'
 const Door          := 'Door'
 const Lever_Off     := 'Lever_Off'
+const Lever_Off_a   := 'Lever_Off_a'
+const Lever_Off_b   := 'Lever_Off_b'
 const Lever_On      := 'Lever_On'
 const Mark_Circle_W := 'Mark_Circle_W'
 const Mark_Cone_W   := 'Mark_Cone_W'
@@ -116,4 +118,6 @@ const Atras_Coords = {
 const Alternative_Tiles = {
 	Teleport_1 : 1,
 	Teleport_2 : 2,
+	Lever_Off_a : 4,
+	Lever_Off_b : 5,
 }

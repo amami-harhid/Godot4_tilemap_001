@@ -25,7 +25,7 @@ func _get_init_position()->Vector2i:
 # 継承先でオーバーライドすること
 # Playerのアニメーション間隔（秒）
 func _get_animation_wait_time()->float:
-	return 10
+	return 10 # 仮の値
 
 # Playerを操作するメソッド
 # GameSceneのTileMap(=game)の_process() で呼び出すこと

@@ -63,6 +63,7 @@ func erase_cell(_tilemap:TileMap,_coords:Vector2i):
 # レイヤーを１枚だけ用意する前提のメソッドである
 # _source_id は、GameConstants に記載あり。
 # _atras_coords は、GameConstants に記載あり。
-func set_cell(_tilemap:TileMap,_coords:Vector2i, _source_id:int, _atras_coords:Vector2i):
-	_tilemap.set_cell(GameConstants.Layer_Tile_Data, _coords, _source_id, _atras_coords)
+func set_cell(_tilemap:TileMap,_coords:Vector2i, _source_id:int, _atras_coords:Vector2i,_alternative_coords:int=0):
+	#_tilemap.set_cell(GameConstants.Layer_Tile_Data, _coords, _source_id, _atras_coords)
+	_tilemap.set_cell(GameConstants.Layer_Tile_Data, _coords, _source_id, _atras_coords,_alternative_coords)
 

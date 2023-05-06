@@ -22,9 +22,13 @@ resource_name = "Arrows"
 texture = ExtResource("2_tdrkn")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
+0:0/0/custom_data_0 = "Arrow_Right"
 1:0/0 = 0
+1:0/0/custom_data_0 = "Arrow_Up"
 2:0/0 = 0
+2:0/0/custom_data_0 = "Arrow_Down"
 3:0/0 = 0
+3:0/0/custom_data_0 = "Arrow_Left"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5elpw"]
 resource_name = "Teleports"
@@ -50,10 +54,14 @@ texture_region_size = Vector2i(64, 64)
 resource_name = "Lever"
 texture = ExtResource("5_cyhey")
 texture_region_size = Vector2i(64, 64)
-0:0/next_alternative_id = 4
+0:0/next_alternative_id = 6
 0:0/0 = 0
 0:0/0/custom_data_0 = "Lever_Off"
-1:0/next_alternative_id = 2
+0:0/4 = 4
+0:0/4/custom_data_0 = "Lever_Off_a"
+0:0/5 = 5
+0:0/5/custom_data_0 = "Lever_Off_b"
+1:0/next_alternative_id = 4
 1:0/0 = 0
 1:0/0/custom_data_0 = "Lever_On"
 
