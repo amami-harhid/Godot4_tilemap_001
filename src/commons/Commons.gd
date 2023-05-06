@@ -43,6 +43,11 @@ func get_tile_data(_tilemap:TileMap,_pos:Vector2i)->TileData:
 func get_tile_data_kind(_tiledata:TileData)->String:
 	return _tiledata.get_custom_data_by_layer_id(GameConstants.Layer_Data_Kind)
 
+# 使われているタイルをすべて取り出し配列として返す
+# カスタムデータは１個だけの前提のメソッドである
+func get_used_cells(_tileMap:TileMap)->Array:
+	return _tileMap.get_used_cells(GameConstants.Layer_Tile_Data)
+
 # 指定したマップ位置のタイルを別のタイルへ変更する
 # タイルマップのレイヤーは 固定とする
 # レイヤーを１枚だけ用意する前提のメソッドである

@@ -7,7 +7,7 @@ class_name CanvasLayerTileMapCommon
 
 enum Game_Level {
 	Game_Level_Undefined = -1, # ゲームレベル未設定
-	Game_Level_First = 2, # 最初のゲームレベル
+	Game_Level_First = 3, # 最初のゲームレベル
 	Game_Level_Final = 3, # 最後のゲームレベル
 }
 
