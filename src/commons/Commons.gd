@@ -53,9 +53,9 @@ func get_used_cells(_tileMap:TileMap)->Array:
 # レイヤーを１枚だけ用意する前提のメソッドである
 # _source_id は、GameConstants に記載あり。
 # _atras_coords は、GameConstants に記載あり。
-func replace_cell(_tilemap:TileMap,_coords:Vector2i, _source_id:int, _atras_coords:Vector2i):
+func replace_cell(_tilemap:TileMap,_coords:Vector2i, _source_id:int, _atras_coords:Vector2i,_alternative_coords:int=0):
 	erase_cell(_tilemap,_coords)
-	set_cell(_tilemap,_coords, _source_id, _atras_coords)
+	set_cell(_tilemap,_coords, _source_id, _atras_coords,_alternative_coords)
 
 # 指定した位置のタイルを消去する
 # タイルマップのレイヤーは 固定とする

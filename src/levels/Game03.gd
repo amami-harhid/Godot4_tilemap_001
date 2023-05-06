@@ -33,10 +33,10 @@ func _is_changing_tile()->bool:
 		if Commons.find_str(_tile_kind, GameConstants.Button_Off)==0:
 			_button_off = true
 			return true
-		if not _teleport_tile:
-			if Commons.find_str(_tile_kind, GameConstants.Teleport)==0:
-				_teleport_tile = true
-				return true
+#		if Commons.find_str(_tile_kind, GameConstants.Teleport)==0:
+		if _tile_kind == GameConstants.Teleport:
+			_teleport_tile = true
+			return true
 	return false
 
 func _change():
@@ -61,7 +61,14 @@ func _change():
 				if _tile:
 					var _kind = Commons.get_tile_data_kind(_tile)
 					if Commons.find_str(_kind,GameConstants.Teleport)==0:
-						if _tile != _curr_tile:
+						if _curr_pos != _pos:
+							print(_pos)
+							# 見つけたタイルを別のテレポートタイルに置き換える
+							var _teleport := GameConstants.Teleport
+							var _altras = GameConstants.Atras_Coords
+							var _teleport_2 := GameConstants.Teleport_2
+							var _alternative = GameConstants.Alternative_Tiles
+							Commons.replace_cell(self,_pos,GameConstants.Source_Id_Teleports, _altras.get(_teleport),_alternative.get(_teleport_2))
 							# 見つけたタイルの位置へ
 							player.set_map_position(_pos)
 							self._move()
