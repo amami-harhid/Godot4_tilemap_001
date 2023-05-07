@@ -14,6 +14,7 @@ func _is_wall_tile(_tile_data:TileData)->bool:
 		var _tile_kind:String = Commons.get_tile_data_kind(_tile_data)
 		if _tile_kind == GameConstants.Wall:
 			# 『壁』です
+			main._play_hit08_1()
 			return true
 	# タイルがないときは『壁』ではないです
 	return false
@@ -23,12 +24,14 @@ func _replace_to_lever_on(_pos:Vector2i):
 	var _lever_on := GameConstants.Lever_On
 	var _altras = GameConstants.Atras_Coords
 	Commons.replace_cell(self, _pos, GameConstants.Source_Id_Levers, _altras.get(_lever_on))
+	main._play_hit08_1()
 
 # 『ボタン』タイルをオンにする
 func _replace_to_button_on(_pos:Vector2i):
 	var _button_on := GameConstants.Button_On
 	var _altras = GameConstants.Atras_Coords
 	Commons.replace_cell(self, _pos, GameConstants.Source_Id_Buttons, _altras.get(_button_on))
+	main._play_hit08_1()
 	
 # 『ドア』タイルを出現させる
 func _add_door_tile(_door_pos:Vector2i):
@@ -55,3 +58,35 @@ func action_when_conditions(_condition1:Callable, _condition2:Callable, _action:
 					# 最初にタイルを見つけた時点で捜索終了する
 					return
 
+# 矢印のマークの向きと移動しようとする向きが合致するとき True を返す
+# Playerの現在地がないときは False
+# Playerの現在地のタイルがないときは True(動ける)
+func _match_arrows_direction(_dir:Vector2i)->bool:
+	var _meta = player.get_map_position()
+	if _meta:
+		var _current_pos:Vector2i = _meta
+		var _tiledata:TileData = Commons.get_tile_data(self,_current_pos)
+		if _tiledata :
+			var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
+			# 矢印タイルのとき向きが一致すれば Trueを返す
+			var _escape:bool = false
+			if _tile_kind == GameConstants.Arrow_Left:
+				_escape = _dir == GameConstants.Dir_Left
+			elif _tile_kind == GameConstants.Arrow_Right:
+				_escape = _dir == GameConstants.Dir_Right
+			elif _tile_kind == GameConstants.Arrow_Up:
+				_escape = _dir == GameConstants.Dir_Up
+			elif _tile_kind == GameConstants.Arrow_Down:
+				_escape = _dir == GameConstants.Dir_Down
+			else:
+				# タイル種別が該当なしのとき
+				_escape = true
+			
+			if not _escape:
+				main._play_hit08_1()
+
+			return _escape
+		else:
+			# タイルがないとき
+			return true
+	return false

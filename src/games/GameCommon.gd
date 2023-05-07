@@ -45,7 +45,7 @@ func _process_player():
 		player.animation_down()
 	else:
 		pass
-
+	
 	# ゲームレベルクリア条件を満たしたか？	
 	# -- ゲームレベルクリア条件は、継承先で変更できる	
 	if _is_stage_clear():

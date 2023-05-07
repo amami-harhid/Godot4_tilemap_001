@@ -73,27 +73,8 @@ func _can_move(_dir:Vector2i)->bool:
 
 # Playerがいるタイルは抜け出せるか
 func _can_escape_from_current_tile(_dir:Vector2i)->bool:
-	var _meta = player.get_map_position()
-	if _meta:
-		var _current_pos:Vector2i = _meta
-		var _tiledata:TileData = Commons.get_tile_data(self,_current_pos)
-		if _tiledata :
-			var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
-			# 矢印タイルのとき向きが一致すれば Trueを返す
-			if _tile_kind == GameConstants.Arrow_Left:
-				return _dir == GameConstants.Dir_Left
-			elif _tile_kind == GameConstants.Arrow_Right:
-				return _dir == GameConstants.Dir_Right
-			elif _tile_kind == GameConstants.Arrow_Up:
-				return _dir == GameConstants.Dir_Up
-			elif _tile_kind == GameConstants.Arrow_Down:
-				return _dir == GameConstants.Dir_Down
-			else:
-				# タイル種別が該当なしのとき
-				return true
-		else:
-			return true
-	return false
+	var _escape:bool = _match_arrows_direction(_dir)
+	return _escape
 
 # Playerは次の位置のタイルへ入れるか
 func _can_enter_to_next_position(_next_pos:Vector2i)->bool:

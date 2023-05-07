@@ -30,7 +30,7 @@ func load_game():
 	# ロードする前にプレイヤーレイヤーを消す
 	canvasLayerPlayer.hide()
 	var _loader := Callable(self,'_load_game')
-	Commons.one_shot_timer(0.2, _loader)
+	Commons.one_shot_timer(1.2, _loader)
 	pass
 
 func _load_game():
