@@ -60,6 +60,12 @@ MainDetail < MainCommon < Node2D
 スマホで試していないですが、多分動かない。うごくようにしたいです。<br>
 ゆっくり対応します。
 
+### タッチパネルFlick対応
+疑似的に対応してみました。（操作確認中 Chromebook)
+
+https://game.mirai-logic.com/tilemap_sample01/
+
+
 
 
 
