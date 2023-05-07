@@ -22,3 +22,5 @@ script = ExtResource("4_gwta5")
 metadata/map_position = ""
 
 [node name="CanvasLayerPanel" type="CanvasLayer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

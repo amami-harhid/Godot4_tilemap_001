@@ -115,6 +115,7 @@ func _is_stage_clear():
 		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
 		if _tile_kind == GameConstants.Door:
 			# ドアに入った
+			main._play_hit08_1()
 			return true
 
 	return false

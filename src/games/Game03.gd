@@ -49,6 +49,7 @@ func _change():
 		var _arrow_down_pos := Vector2i(14,3) 
 		var _arrow_down := GameConstants.Arrow_Down
 		Commons.set_cell(self,_arrow_down_pos, GameConstants.Source_Id_Arrows,_altras.get(_arrow_down))
+		main._play_hit08_1()
 	elif _teleport_tile: # テレポートタイルだったら
 		# Playerのいる位置のタイルを取得する
 		var _curr_pos:Vector2i = player.get_map_position()
@@ -58,6 +59,7 @@ func _change():
 		var _conditions02 = Callable(self,'_teleport_condition02')
 		var _action = Callable(self,'_teleport_action')
 		action_when_conditions(_conditions01, _conditions02, _action)
+		main._play_hit08_1()
 
 
 # 捜索中タイルがテレポートタイルである条件その１

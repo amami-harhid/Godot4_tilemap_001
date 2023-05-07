@@ -49,6 +49,7 @@ func _change():
 		var _lever_off_b := GameConstants.Lever_Off_b
 		var _alternative = GameConstants.Alternative_Tiles
 		Commons.set_cell(self,_lever_off_b_pos, GameConstants.Source_Id_Levers,_altras.get(_lever_off),_alternative.get(_lever_off_b))
+		main._play_hit08_1()
 	elif _lever_off_B: # ２回目のレバーオンでドア出現
 		# レバーオンにする
 		var _pos:Vector2i = player.get_map_position()
@@ -56,6 +57,7 @@ func _change():
 		# 『ドア』タイルを出現させる
 		var _door_pos := Vector2i(1,1)
 		_add_door_tile(_door_pos)
+		main._play_hit08_1()
 	pass
 
 # Playerが動ける条件を記載する

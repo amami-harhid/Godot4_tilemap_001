@@ -35,6 +35,7 @@ func _add_door_tile(_door_pos:Vector2i):
 	var _altras = GameConstants.Atras_Coords
 	var _door := GameConstants.Door
 	Commons.set_cell(self,_door_pos, GameConstants.Source_Id_Door, _altras.get(_door))
+	main._play_hit08_1()
 
 # タイルマップ上のタイルを全検索し、指定マップ位置以外のタイルのなかで条件に合致するタイルがあれば
 # 指定したアクションを実行する
