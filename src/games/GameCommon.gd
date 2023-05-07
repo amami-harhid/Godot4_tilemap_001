@@ -28,10 +28,37 @@ func _get_init_position()->Vector2i:
 func _get_animation_wait_time()->float:
 	return 10 # 仮の値
 
+# マウス操作を検知する
+func _input(event:InputEvent):
+	if event.button_mask > 0: # マウス押されたとき
+		var _relative = event.get('relative')
+		if _relative : # フリックしたとき 
+			pass
+	#print(event)
+
 # Playerを操作するメソッド
 # GameSceneのTileMap(=game)の_process() で呼び出すこと
 func _process_player():
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_released("mouse_flick"):
+		var _mouse_pos = get_viewport().get_mouse_position()
+		var _pos = local_to_map(_mouse_pos)  - player.get_map_position()
+		var _abs_pos = abs(_pos)
+		if _abs_pos.x > _abs_pos.y :
+			if _pos.x > 0: # 右へ
+				_move_right()
+				player.animation_right()
+			elif _pos.x < 0: # 左へ
+				_move_left()
+				player.animation_left()
+		else:
+			if _pos.y > 0: # 下へ
+				_move_down()
+				player.animation_down()
+			elif _pos.y < 0: # 上へ
+				_move_up()
+				player.animation_up()
+	
+	elif Input.is_action_just_pressed("ui_up"):
 		_move_up()
 		player.animation_up()
 	elif Input.is_action_just_pressed("ui_right"):
