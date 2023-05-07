@@ -1,9 +1,6 @@
-extends CanvasLayer
+extends MainCommon
 
-class_name CanvasLayerTileMapCommon
-
-# プレイヤーCanvasレイヤー
-@onready var canvasLayerPlayer:CanvasLayer = get_node('../CanvasLayerPlayer')
+class_name MainDetail
 
 enum Game_Level {
 	Game_Level_Undefined = -1, # ゲームレベル未設定
@@ -25,24 +22,24 @@ func level_up():
 		_level = Game_Level.Game_Level_First
 
 # Levelのパス	
-const Path_Level_Tscn = "res://resources/level/Level%02d.tscn"
+const Path_Level_Tscn = "res://resources/stage/Stage%02d.tscn"
 
 func load_game():
 	# ロードする前にレイヤーを隠す
-	self.hide()
+	canvasLayerTilemap.hide()
 	# ロードする前にプレイヤーレイヤーを消す
 	canvasLayerPlayer.hide()
-	var _load_game := Callable(self,'_load_game')
-	Commons.one_shot_timer(0.2, _load_game)
+	var _loader := Callable(self,'_load_game')
+	Commons.one_shot_timer(0.2, _loader)
 	pass
 
 func _load_game():
-	var _child_count = self.get_child_count()
+	var _child_count = canvasLayerTilemap.get_child_count()
 	if _child_count > 0:
 		# 子ノードがあるとき
 		# 子ノードを消す
-		for _node in self.get_children() :
-			self.remove_child(_node)
+		for _node in canvasLayerTilemap.get_children() :
+			canvasLayerTilemap.remove_child(_node)
 		
 	# Level(Node2D)を読み込む
 	var _level_path = Path_Level_Tscn%_level # %02d を数字に置換
@@ -50,8 +47,8 @@ func _load_game():
 	# インスタンスを作成
 	var _level_obj = _level_res.instantiate()
 	# 子ノードとして追加する
-	self.add_child(_level_obj)
+	canvasLayerTilemap.add_child(_level_obj)
 	# レイヤーを表示する
-	self.show()
+	canvasLayerTilemap.show()
 	# プレイヤーレイヤーを表示する
 	canvasLayerPlayer.show()

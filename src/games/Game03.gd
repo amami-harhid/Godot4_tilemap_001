@@ -1,4 +1,4 @@
-extends GameCommon
+extends GameStageDetail
 
 #----------------------
 # Level03
@@ -42,9 +42,10 @@ func _is_changing_tile()->bool:
 func _change():
 	if _button_off: # ボタンオンにする/タイル(14,3)を矢印右へ
 		var _pos:Vector2i = player.get_map_position()
-		var _lever_on := GameConstants.Button_On
+		# ボタンオンにする
+		_replace_to_button_on(_pos)
+		# タイル(14,3)を矢印右へ
 		var _altras = GameConstants.Atras_Coords
-		Commons.replace_cell(self, _pos, GameConstants.Source_Id_Buttons, _altras.get(_lever_on))
 		var _arrow_down_pos := Vector2i(14,3) 
 		var _arrow_down := GameConstants.Arrow_Down
 		Commons.set_cell(self,_arrow_down_pos, GameConstants.Source_Id_Arrows,_altras.get(_arrow_down))
@@ -53,25 +54,42 @@ func _change():
 		var _curr_pos:Vector2i = player.get_map_position()
 		var _curr_tile = Commons.get_tile_data(self,_curr_pos) # 必ず取得できる
 		# Playerの位置を、別のテレポートタイルへ移動させる
-		var _rect:Rect2i = self.get_used_rect()
-		for _y in range(_rect.size.y):
-			for _x in range(_rect.size.x):
-				var _pos := Vector2i(_x,_y)
-				var _tile = Commons.get_tile_data(self,_pos)
-				if _tile:
-					var _kind = Commons.get_tile_data_kind(_tile)
-					if Commons.find_str(_kind,GameConstants.Teleport)==0:
-						if _curr_pos != _pos:
-							print(_pos)
-							# 見つけたタイルを別のテレポートタイルに置き換える
-							var _teleport := GameConstants.Teleport
-							var _altras = GameConstants.Atras_Coords
-							var _teleport_2 := GameConstants.Teleport_2
-							var _alternative = GameConstants.Alternative_Tiles
-							Commons.replace_cell(self,_pos,GameConstants.Source_Id_Teleports, _altras.get(_teleport),_alternative.get(_teleport_2))
-							# 見つけたタイルの位置へ
-							player.set_map_position(_pos)
-							self._move()
+		var _conditions01 = Callable(self,'_teleport_condition01')
+		var _conditions02 = Callable(self,'_teleport_condition02')
+		var _action = Callable(self,'_teleport_action')
+		action_when_conditions(_conditions01, _conditions02, _action)
+
+
+# 捜索中タイルがテレポートタイルである条件その１
+# プレイヤーの現在位置が捜索中タイルの位置と同じでないとき True
+func _teleport_condition01(_pos:Vector2i)->bool:
+	var _curr_pos:Vector2i = player.get_map_position()
+	if _curr_pos == _pos :
+		return false
+
+	return true
+
+# 捜索中タイルがテレポートタイルである条件その２
+# 捜索中タイルの種別が 『テレポート』であるとき True
+func _teleport_condition02(_pos:Vector2i)->bool:
+	var _tile = Commons.get_tile_data(self,_pos)
+	if _tile:
+		var _kind = Commons.get_tile_data_kind(_tile)
+		if Commons.find_str(_kind,GameConstants.Teleport)==0:
+			return true
+
+	return false
+
+func _teleport_action(_pos:Vector2i):
+	# 見つけたタイルを別のテレポートタイルに置き換える
+	var _teleport := GameConstants.Teleport
+	var _altras = GameConstants.Atras_Coords
+	var _teleport_2 := GameConstants.Teleport_2
+	var _alternative = GameConstants.Alternative_Tiles
+	Commons.replace_cell(self,_pos,GameConstants.Source_Id_Teleports, _altras.get(_teleport),_alternative.get(_teleport_2))
+	# 見つけたタイルの位置へ
+	player.set_map_position(_pos)
+	self._move()
 
 # Playerが動ける条件を記載する
 func _can_move(_dir:Vector2i)->bool:
@@ -112,9 +130,9 @@ func _can_escape_from_current_tile(_dir:Vector2i)->bool:
 func _can_enter_to_next_position(_next_pos:Vector2i)->bool:
 	# 次の位置のタイルを取得する
 	var _tiledata:TileData = Commons.get_tile_data(self,_next_pos)
-	if _tiledata :
-		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
-		if _tile_kind == GameConstants.Wall:
-			return false
+	if _is_wall_tile(_tiledata): # 『壁』タイルのとき
+		# 入れない
+		return false
 
+	# 入れる
 	return true

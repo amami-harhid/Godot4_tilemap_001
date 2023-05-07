@@ -1,4 +1,4 @@
-extends GameCommon
+extends GameStageDetail
 
 #----------------------
 # Level02
@@ -50,13 +50,12 @@ func _change():
 		var _alternative = GameConstants.Alternative_Tiles
 		Commons.set_cell(self,_lever_off_b_pos, GameConstants.Source_Id_Levers,_altras.get(_lever_off),_alternative.get(_lever_off_b))
 	elif _lever_off_B: # ２回目のレバーオンでドア出現
+		# レバーオンにする
 		var _pos:Vector2i = player.get_map_position()
-		var _lever_on := GameConstants.Lever_On
-		var _altras = GameConstants.Atras_Coords
-		Commons.replace_cell(self, _pos, GameConstants.Source_Id_Levers, _altras.get(_lever_on))
+		_replace_to_lever_on(_pos)
+		# 『ドア』タイルを出現させる
 		var _door_pos := Vector2i(1,1)
-		var _door := GameConstants.Door
-		Commons.set_cell(self,_door_pos, GameConstants.Source_Id_Door, _altras.get(_door))
+		_add_door_tile(_door_pos)
 	pass
 
 # Playerが動ける条件を記載する
@@ -98,9 +97,9 @@ func _can_escape_from_current_tile(_dir:Vector2i)->bool:
 func _can_enter_to_next_position(_next_pos:Vector2i)->bool:
 	# 次の位置のタイルを取得する
 	var _tiledata:TileData = Commons.get_tile_data(self,_next_pos)
-	if _tiledata :
-		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
-		if _tile_kind == GameConstants.Wall:
-			return false
+	if _is_wall_tile(_tiledata): # 『壁』タイルのとき
+		# 入れない
+		return false
 
+	# 入れる
 	return true

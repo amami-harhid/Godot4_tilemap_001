@@ -1,12 +1,13 @@
 extends TileMap
 
 #===================================
-# GameNN.gd の親クラス
+# GameStageDetail/GameNN.gd の親クラス
 #===================================
 
 class_name GameCommon
 
-@onready var canvasLayerTilemap:CanvasLayerTileMapCommon = get_node('../../../CanvasLayerTileMap')
+@onready var main:Main = get_node('../../../') # トップ
+@onready var canvasLayerTilemap:CanvasLayer = get_node('../../../CanvasLayerTileMap')
 @onready var player:Sprite2D = get_node('../../../CanvasLayerPlayer/PlayerSprite2D')
 
 # Playerの初期処理
@@ -47,9 +48,9 @@ func _process_player():
 
 	# ゲームレベルクリア条件を満たしたか？	
 	# -- ゲームレベルクリア条件は、継承先で変更できる	
-	if _is_game_clear():
-		canvasLayerTilemap.level_up()
-		canvasLayerTilemap.load_game()
+	if _is_stage_clear():
+		main.level_up()
+		main.load_game()
 	else:
 		# テレポートをさせるタイルの上にプレイヤーがいるか？
 		if _is_teleportation_tile():
@@ -101,7 +102,7 @@ func _can_move(_dir:Vector2i)->bool:
 # レベルクリア条件
 # 『ドア』に入ったらレベルクリア！
 # 必要に応じて継承先でオーバーライドすること
-func _is_game_clear():
+func _is_stage_clear():
 	# 「ドアに入った」判定を１回だけ行うため
 	# タイルマップが表示されているときだけ
 	# ゲームクリア判定をする
