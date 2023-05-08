@@ -28,13 +28,6 @@ func _get_init_position()->Vector2i:
 func _get_animation_wait_time()->float:
 	return 10 # 仮の値
 
-# マウス操作を検知する
-func _input(event:InputEvent):
-	if event.button_mask > 0: # マウス押されたとき
-		var _relative = event.get('relative')
-		if _relative : # フリックしたとき 
-			pass
-	#print(event)
 
 # Playerを操作するメソッド
 # GameSceneのTileMap(=game)の_process() で呼び出すこと
@@ -120,6 +113,8 @@ func _move(_dir:Vector2i = Vector2i(0,0)):
 		var _local_pos = self.map_to_local(_next_map_pos)
 		player.position = _local_pos
 		player.set_meta(GameConstants.Map_Position_Key, _next_map_pos)
+		if( not _dir == Vector2i(0,0)):
+			main.play_shutter_01_1()
 
 # 継承先でオーバーライドすること
 func _can_move(_dir:Vector2i)->bool:
@@ -142,7 +137,7 @@ func _is_stage_clear():
 		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
 		if _tile_kind == GameConstants.Door:
 			# ドアに入った
-			main._play_hit08_1()
+			main.play_hit08_1()
 			return true
 
 	return false

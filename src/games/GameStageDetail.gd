@@ -14,7 +14,7 @@ func _is_wall_tile(_tile_data:TileData)->bool:
 		var _tile_kind:String = Commons.get_tile_data_kind(_tile_data)
 		if _tile_kind == GameConstants.Wall:
 			# 『壁』です
-			main._play_hit08_1()
+			main.play_hit08_1()
 			return true
 	# タイルがないときは『壁』ではないです
 	return false
@@ -24,21 +24,21 @@ func _replace_to_lever_on(_pos:Vector2i):
 	var _lever_on := GameConstants.Lever_On
 	var _altras = GameConstants.Atras_Coords
 	Commons.replace_cell(self, _pos, GameConstants.Source_Id_Levers, _altras.get(_lever_on))
-	main._play_hit08_1()
+	main.play_hit08_1()
 
 # 『ボタン』タイルをオンにする
 func _replace_to_button_on(_pos:Vector2i):
 	var _button_on := GameConstants.Button_On
 	var _altras = GameConstants.Atras_Coords
 	Commons.replace_cell(self, _pos, GameConstants.Source_Id_Buttons, _altras.get(_button_on))
-	main._play_hit08_1()
+	main.play_hit08_1()
 	
 # 『ドア』タイルを出現させる
 func _add_door_tile(_door_pos:Vector2i):
 	var _altras = GameConstants.Atras_Coords
 	var _door := GameConstants.Door
 	Commons.set_cell(self,_door_pos, GameConstants.Source_Id_Door, _altras.get(_door))
-	main._play_hit08_1()
+	main.play_hit08_1()
 
 # タイルマップ上のタイルを全検索し、指定マップ位置以外のタイルのなかで条件に合致するタイルがあれば
 # 指定したアクションを実行する
@@ -83,7 +83,7 @@ func _match_arrows_direction(_dir:Vector2i)->bool:
 				_escape = true
 			
 			if not _escape:
-				main._play_hit08_1()
+				main.play_hit08_1()
 
 			return _escape
 		else:

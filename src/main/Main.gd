@@ -19,9 +19,11 @@ func _sound_load():
 func _play_musmus_BGM_090():
 	_game_sounds.play_musmus_BGM_090(2)
 
-func _play_hit08_1():
+func play_hit08_1():
 	_game_sounds.play_hit08_1()
 
+func play_shutter_01_1():
+	_game_sounds.play_shutter_01_1()
 
 func _process(delta):
 	pass
