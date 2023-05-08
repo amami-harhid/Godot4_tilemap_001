@@ -57,13 +57,18 @@ MainDetail < MainCommon < Node2D
 
 
 ## スマホ版対応
-スマホで試していないですが、多分動かない。うごくようにしたいです。<br>
+スマホで試していないですが、多分動かない。<br>
+うごくようにしたいです。<br>
 ゆっくり対応します。
 
 ### タッチパネルFlick対応
-疑似的に対応してみました。（操作確認中 Chromebook)
+疑似的に対応してみました。（操作確認済 Chromebook)
+https://game.mirai-logic.com/tilemap_sample01_b/web/game.html
 
-https://game.mirai-logic.com/tilemap_sample01/
+### iOS
+古めのiOS(15.x)しか試してないけど。<br>
+iOS(Safari/Chrome)では動かないみたい。<br>
+『Cross Origin Isolation』や『SharedArrayBuffer』の関係かもしれないがよく原因調査中。
 
 
 
