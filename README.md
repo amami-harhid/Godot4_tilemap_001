@@ -56,19 +56,17 @@ MainDetail < MainCommon < Node2D
 ゆっくり対応します。
 
 
-## スマホ版対応
-スマホで試していないですが、多分動かない。<br>
-うごくようにしたいです。<br>
-ゆっくり対応します。
+## タブレット版対応
 
-### タッチパネルFlick対応
-疑似的に対応してみました。（操作確認済 Chromebook)
+### タッチパネルFlick風対応
+疑似的に対応してみました。（操作確認済 Chromebook)<br>
 https://game.mirai-logic.com/tilemap_sample01_b/web/game.html
 
 ### iOS
 古めのiOS(15.x)しか試してないけど。<br>
 iOS(Safari/Chrome)では動かないみたい。<br>
-『Cross Origin Isolation』や『SharedArrayBuffer』の関係かもしれないがよく原因調査中。
+原因調査中。<br>
+『Cross Origin Isolation』や『SharedArrayBuffer』との相性かもしれない。
 
 
 
