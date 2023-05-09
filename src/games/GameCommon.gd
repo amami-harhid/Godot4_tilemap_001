@@ -7,11 +7,16 @@ extends TileMap
 class_name GameCommon
 
 # Mainノード
+#@onready var main:Main = get_node('../../../') # トップ
 @onready var main:Main = get_node('../../../') # トップ
 # ゲームタイルマップノード
-@onready var canvasLayerTilemap:CanvasLayer = get_node('../../../CanvasLayerTileMap')
+#@onready var canvasLayerTilemap:CanvasLayer = get_node('../../../CanvasLayerTileMap')
+@onready var canvasLayerTilemap:CanvasLayer = main.get_node('CanvasLayerTileMap')
+#@onready var canvasLayerTilemapNode2D:Node2D = main.get_node('CanvasLayerTileMap/Node2D')
 # プレイヤーノード
-@onready var player:Player = get_node('../../../CanvasLayerPlayer/PlayerSprite2D')
+#@onready var player:Player = get_node('../../../CanvasLayerPlayer/PlayerSprite2D')
+@onready var player:Player = main.get_node('CanvasLayerPlayer/PlayerSprite2D')
+@onready var point_light:PointLight2D = $PointLight2D
 
 # Playerの初期処理
 func _player_initialize():
@@ -119,6 +124,9 @@ func _move(_dir:Vector2i = Vector2i(0,0)):
 		var _local_pos = self.map_to_local(_next_map_pos)
 		player.position = _local_pos
 		player.set_map_position(_next_map_pos)
+		if point_light:
+			point_light.position = player.position
+		#light.position = player.position
 		if( not _dir == Vector2i(0,0)):
 			main.play_shutter_01_1()
 

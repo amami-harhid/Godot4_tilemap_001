@@ -36,3 +36,4 @@ vframes = 4
 script = ExtResource("4_gwta5")
 
 [node name="CanvasLayerPanel" type="CanvasLayer" parent="."]
+layer = 2

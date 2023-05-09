@@ -6,6 +6,8 @@ extends GameStageDetail
 # TileMapへPlayerを配置するのは
 # GameSceneのadd_child()をしたときがふさわしい。
 const Player_Init_Position := Vector2i(16,8)
+# タイル（矢印下）をカラータイルと切り替えるアニメーション
+@onready var tile_animation:AnimationPlayer = $AnimationPlayerTiles
 
 func _ready():
 	_player_initialize()
@@ -40,16 +42,12 @@ func _is_changing_tile()->bool:
 	return false
 
 func _change():
-	if _button_off: # ボタンオンにする/タイル(15,3)を矢印右へ
+	if _button_off: # ボタンオンにする/タイル(15,3)を矢印下へ
 		var _pos:Vector2i = player.get_map_position()
 		# ボタンオンにする
 		_replace_to_button_on(_pos)
-		# タイル(14,3)を矢印下へ
-		var _altras = GameConstants.Atras_Coords
-		var _alternative = GameConstants.Alternative_Tiles
-		var _arrow_pos := Vector2i(15,3) 
-		var _arrow_down := GameConstants.Arrow_Down
-		Commons.set_cell(self,_arrow_pos, GameConstants.Source_Id_Arrows,_altras.get(_arrow_down),_alternative.get(_arrow_down))
+		# タイル(14,3)を矢印下にしてカラータイルと切り替えるアニメーション
+		tile_animation.play("Tiles")
 		main.play_hit08_1()
 	elif _teleport_tile: # テレポートタイルだったら
 		# Playerのいる位置のタイルを取得する
@@ -62,6 +60,24 @@ func _change():
 		action_when_conditions(_conditions01, _conditions02, _action)
 		main.play_hit08_1()
 
+func _change_to_arrow_down():
+	# タイル(14,3)を矢印下へ
+	# タイル(14,3)を『矢印下』へ
+	var _altras = GameConstants.Atras_Coords
+	var _pos := Vector2i(15,3) 
+	var _source := GameConstants.Source_Id_Arrows
+	var _key := GameConstants.Arrow_Down
+	Commons.set_cell(self,_pos, _source,_altras.get(_key))
+	pass
+func _change_arrow_down_color():
+	# タイル(14,3)を『矢印下（カラー）』へ
+	var _altras = GameConstants.Atras_Coords
+	var _alternative = GameConstants.Alternative_Tiles
+	var _pos := Vector2i(15,3) 
+	var _source := GameConstants.Source_Id_Arrows
+	var _key := GameConstants.Arrow_Down
+	Commons.set_cell(self,_pos, _source,_altras.get(_key),_alternative.get(_key))
+	pass
 
 # 捜索中タイルがテレポートタイルである条件その１
 # プレイヤーの現在位置が捜索中タイルの位置と同じでないとき True

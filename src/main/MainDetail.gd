@@ -35,19 +35,26 @@ func load_game():
 
 func _load_game():
 	var _child_count = canvasLayerTilemap.get_child_count()
+#	var _child_count = canvasLayerTilemapNode2d.get_child_count()
+	print("child_count=%d"%_child_count)
 	if _child_count > 0:
 		# 子ノードがあるとき
 		# 子ノードを消す
-		for _node in canvasLayerTilemap.get_children() :
-			canvasLayerTilemap.remove_child(_node)
+		for _node in canvasLayerTilemap.get_children():
+#		for _node in canvasLayerTilemapNode2d.get_children():
+			if _node.name == "GameScene":
+				canvasLayerTilemap.remove_child(_node)
+#				canvasLayerTilemapNode2d.remove_child(_node)
 		
 	# Level(Node2D)を読み込む
 	var _level_path = Path_Level_Tscn%_level # %02d を数字に置換
 	var _level_res = load(_level_path)
 	# インスタンスを作成
-	var _level_obj = _level_res.instantiate()
+	var _level_obj:Node2D = _level_res.instantiate()
+	_level_obj.z_index = -1
 	# 子ノードとして追加する
 	canvasLayerTilemap.add_child(_level_obj)
+	#canvasLayerTilemapNode2d.add_child(_level_obj)
 	# レイヤーを表示する
 	canvasLayerTilemap.show()
 	# プレイヤーレイヤーを表示する
