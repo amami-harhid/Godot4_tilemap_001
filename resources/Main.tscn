@@ -34,6 +34,5 @@ texture = ExtResource("3_pxagf")
 hframes = 4
 vframes = 4
 script = ExtResource("4_gwta5")
-metadata/map_position = ""
 
 [node name="CanvasLayerPanel" type="CanvasLayer" parent="."]
