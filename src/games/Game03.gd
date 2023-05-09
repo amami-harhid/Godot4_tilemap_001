@@ -40,15 +40,16 @@ func _is_changing_tile()->bool:
 	return false
 
 func _change():
-	if _button_off: # ボタンオンにする/タイル(14,3)を矢印右へ
+	if _button_off: # ボタンオンにする/タイル(15,3)を矢印右へ
 		var _pos:Vector2i = player.get_map_position()
 		# ボタンオンにする
 		_replace_to_button_on(_pos)
-		# タイル(14,3)を矢印右へ
+		# タイル(14,3)を矢印下へ
 		var _altras = GameConstants.Atras_Coords
-		var _arrow_down_pos := Vector2i(14,3) 
+		var _alternative = GameConstants.Alternative_Tiles
+		var _arrow_pos := Vector2i(15,3) 
 		var _arrow_down := GameConstants.Arrow_Down
-		Commons.set_cell(self,_arrow_down_pos, GameConstants.Source_Id_Arrows,_altras.get(_arrow_down))
+		Commons.set_cell(self,_arrow_pos, GameConstants.Source_Id_Arrows,_altras.get(_arrow_down),_alternative.get(_arrow_down))
 		main.play_hit08_1()
 	elif _teleport_tile: # テレポートタイルだったら
 		# Playerのいる位置のタイルを取得する

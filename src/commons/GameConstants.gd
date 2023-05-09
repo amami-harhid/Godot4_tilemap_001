@@ -10,9 +10,6 @@ extends Node
 # Player 関係
 #-----------------------------------------------
 
-# メタデータのキー
-const Map_Position_Key := "map_position"
-
 # SpriteSheetタイプのTextureを使うので
 # 上下左右を向いたキャラのV方向の位置を定義する
 const Frame_Left :int = 0
@@ -120,4 +117,5 @@ const Alternative_Tiles = {
 	Teleport_2 : 2,
 	Lever_Off_a : 4,
 	Lever_Off_b : 5,
+	Arrow_Down : 1,
 }

@@ -37,8 +37,3 @@ script = ExtResource("4_gwta5")
 metadata/map_position = ""
 
 [node name="CanvasLayerPanel" type="CanvasLayer" parent="."]
-
-[node name="TouchPanel" type="PanelContainer" parent="CanvasLayerPanel"]
-modulate = Color(1, 1, 1, 0)
-offset_right = 1154.0
-offset_bottom = 642.0

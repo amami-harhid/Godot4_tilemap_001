@@ -6,9 +6,12 @@ extends TileMap
 
 class_name GameCommon
 
+# Mainノード
 @onready var main:Main = get_node('../../../') # トップ
+# ゲームタイルマップノード
 @onready var canvasLayerTilemap:CanvasLayer = get_node('../../../CanvasLayerTileMap')
-@onready var player:Sprite2D = get_node('../../../CanvasLayerPlayer/PlayerSprite2D')
+# プレイヤーノード
+@onready var player:Player = get_node('../../../CanvasLayerPlayer/PlayerSprite2D')
 
 # Playerの初期処理
 func _player_initialize():
@@ -51,25 +54,28 @@ func _process_player():
 				_move_up()
 				player.animation_up()
 	
-	elif Input.is_action_just_pressed("ui_up"):
-		_move_up()
-		player.animation_up()
 	elif Input.is_action_just_pressed("ui_right"):
-		_move_right()
+		_move_right() # 右へ
 		player.animation_right()
 	elif Input.is_action_just_pressed("ui_left"):
-		_move_left()
+		_move_left() # 左へ
 		player.animation_left()
 	elif Input.is_action_just_pressed("ui_down"):
-		_move_down()
+		_move_down() # 下へ
 		player.animation_down()
+	elif Input.is_action_just_pressed("ui_up"):
+		_move_up() # 上へ
+		player.animation_up()
 	else:
+		# 何もしない
 		pass
 	
 	# ゲームレベルクリア条件を満たしたか？	
 	# -- ゲームレベルクリア条件は、継承先で変更できる	
 	if _is_stage_clear():
+		# ステージレベルアップ
 		main.level_up()
+		# 新しいステージをロードする（古いステージは消す）
 		main.load_game()
 	else:
 		# テレポートをさせるタイルの上にプレイヤーがいるか？
@@ -112,7 +118,7 @@ func _move(_dir:Vector2i = Vector2i(0,0)):
 		var _next_map_pos:Vector2i = _map_pos + _dir
 		var _local_pos = self.map_to_local(_next_map_pos)
 		player.position = _local_pos
-		player.set_meta(GameConstants.Map_Position_Key, _next_map_pos)
+		player.set_map_position(_next_map_pos)
 		if( not _dir == Vector2i(0,0)):
 			main.play_shutter_01_1()
 
