@@ -3,6 +3,17 @@
 タイルマップを使ったゲームです。<br>
 中学生、高校生向けのプログラミング教育用のネタとして用意しています。<br>
 
+### 音源素材
+
+#### BGM『OtoLogic』 
+打撃音 <br>
+シャッター音 <br>
+https://otologic.jp
+
+#### BGM『MusMus』
+魔女っ婆タヱさん(ループ設定)<br>
+https://musmus.main.jp/
+
 ### 操作方法
 キーボードの矢印キー（上下左右）を押すとプレイヤーが１マス動きます。<br>
 『ドア』のタイルに入ることができたらステージクリアです。<br>
@@ -56,17 +67,14 @@ MainDetail < MainCommon < Node2D
 ゆっくり対応します。
 
 
-## タブレット版対応
+## スマホ版対応
+スマホで試していないですが、多分動かない。うごくようにしたいです。<br>
+ゆっくり対応します。
 
-### タッチパネルFlick風対応
-疑似的に対応してみました。（操作確認済 Chromebook)<br>
-https://game.mirai-logic.com/tilemap_sample01_b/web/game.html
+### タッチパネルFlick対応
+疑似的に対応してみました。（操作確認中 Chromebook)
 
-### iOS
-古めのiOS(15.x)しか試してないけど。<br>
-iOS(Safari/Chrome)では動かないみたい。<br>
-原因調査中。<br>
-『Cross Origin Isolation』や『SharedArrayBuffer』との相性かもしれない。
+https://game.mirai-logic.com/tilemap_sample01/
 
 
 

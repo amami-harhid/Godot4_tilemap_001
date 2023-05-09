@@ -10,11 +10,6 @@ const SoundsPath = 'res://assets/sounds/%s'
 const MusMus_BGM_090 = SoundsPath % 'MusMus-BGM-090.mp3'
 # BGM『OtoLogic』
 # https://otologic.jp/free/se/flash01.html
-# オノマトペ　光る10
-#const Onoma_Flash10_1 = SoundsPath % 'Onoma-Flash10-1_Low-1.mp3'
-#const Onoma_Flash10_2 = SoundsPath % 'Onoma-Flash10-2_Low-2.mp3'
-#const Onoma_Flash10_3 = SoundsPath % 'Onoma-Flash10-3(Low-3).mp3'
-#const Onoma_Flash10_4 = SoundsPath % 'Onoma-Flash10-4(Low-4).mp3'
 const Hit08_1 = SoundsPath % 'Hit08-1.mp3'
 const Shutter_01_1 = SoundsPath % 'Camera-Disposable01-1_Shutter.mp3'
 
