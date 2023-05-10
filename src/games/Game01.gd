@@ -40,12 +40,15 @@ func _is_changing_tile()->bool:
 	if _tiledata:
 		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
 		if Commons.find_str(_tile_kind, GameConstants.Lever_Off)==0:
+			print(_tile_kind, GameConstants.Lever_Off)
 			_lever_off = true
 			return true
 	return false
 
 func _change():
+	# 何が変化するのかをフラグで判断する
 	if _lever_off:
+		print('_change')
 		# レバーオンにする
 		var _pos:Vector2i = player.get_map_position(self)
 		_replace_to_lever_on(_pos)

@@ -4,7 +4,7 @@ class_name MainDetail
 
 enum Game_Level {
 	Game_Level_Undefined = -1, # ゲームレベル未設定
-	Game_Level_First = 1, # 最初のゲームレベル
+	Game_Level_First = 4, # 最初のゲームレベル
 	Game_Level_Final = 4, # 最後のゲームレベル
 }
 

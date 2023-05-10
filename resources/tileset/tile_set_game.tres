@@ -131,9 +131,11 @@ texture_region_size = Vector2i(32, 32)
 4:0/0 = 0
 4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0/custom_data_0 = "Mark_Circle_R"
 6:0/0 = 0
 6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:0/0/physics_layer_0/angular_velocity = 0.0
+6:0/0/custom_data_0 = "Mark_Cone_R"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bubsn"]
 resource_name = "Cage"
@@ -142,7 +144,7 @@ texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/custom_data_0 = "Cage"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2je6"]
 resource_name = "Boxes"
