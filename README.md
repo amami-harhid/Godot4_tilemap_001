@@ -76,6 +76,18 @@ MainDetail < MainCommon < Node2D
 
 https://game.mirai-logic.com/tilemap_sample01/
 
+### iPhone/iPad iOS 15.7
+
+#### iOS 15.7 
+Safariブラウザ初期読み込み時にアクティビティインジケータ(くるくるまわるやつ)が止まらない。<br>
+おそらくの想像だが、WebAssembly OutOfMemory だと思われる。<br>
+Safari(iOS)に問題があって回避策が見つからないときは あきらめるしかない。
+
+#### iOS 16.1
+上と同じ事象。
+
+#### iOS 16.4
+2023/5月時点最新の16.4 は試せていない。
 
 
 

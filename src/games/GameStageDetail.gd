@@ -44,7 +44,7 @@ func _add_door_tile(_door_pos:Vector2i):
 # 指定したアクションを実行する
 # 指定条件、指定アクションは、Callableの形式で与える
 func action_when_conditions(_condition1:Callable, _condition2:Callable, _action:Callable):
-	var _curr_pos:Vector2i = player.get_map_position()
+	var _curr_pos:Vector2i = player.get_map_position(self)
 	var _rect:Rect2i = self.get_used_rect()
 	for _y in range(_rect.size.y):
 		for _x in range(_rect.size.x):
@@ -62,31 +62,29 @@ func action_when_conditions(_condition1:Callable, _condition2:Callable, _action:
 # Playerの現在地がないときは False
 # Playerの現在地のタイルがないときは True(動ける)
 func _match_arrows_direction(_dir:Vector2i)->bool:
-	var _meta = player.get_map_position()
-	if _meta:
-		var _current_pos:Vector2i = _meta
-		var _tiledata:TileData = Commons.get_tile_data(self,_current_pos)
-		if _tiledata :
-			var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
-			# 矢印タイルのとき向きが一致すれば Trueを返す
-			var _escape:bool = false
-			if _tile_kind == GameConstants.Arrow_Left:
-				_escape = _dir == GameConstants.Dir_Left
-			elif _tile_kind == GameConstants.Arrow_Right:
-				_escape = _dir == GameConstants.Dir_Right
-			elif _tile_kind == GameConstants.Arrow_Up:
-				_escape = _dir == GameConstants.Dir_Up
-			elif _tile_kind == GameConstants.Arrow_Down:
-				_escape = _dir == GameConstants.Dir_Down
-			else:
-				# タイル種別が該当なしのとき
-				_escape = true
-			
-			if not _escape:
-				main.play_hit08_1()
-
-			return _escape
+	var _current_pos:Vector2i = player.get_map_position(self)
+	var _tiledata:TileData = Commons.get_tile_data(self,_current_pos)
+	if _tiledata :
+		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
+		# 矢印タイルのとき向きが一致すれば Trueを返す
+		var _escape:bool = false
+		if _tile_kind == GameConstants.Arrow_Left:
+			_escape = _dir == GameConstants.Dir_Left
+		elif _tile_kind == GameConstants.Arrow_Right:
+			_escape = _dir == GameConstants.Dir_Right
+		elif _tile_kind == GameConstants.Arrow_Up:
+			_escape = _dir == GameConstants.Dir_Up
+		elif _tile_kind == GameConstants.Arrow_Down:
+			_escape = _dir == GameConstants.Dir_Down
 		else:
-			# タイルがないとき
-			return true
-	return false
+			# タイル種別が該当なしのとき
+			_escape = true	
+		
+		# 脱出できないときは音を鳴らす
+		if not _escape:
+			main.play_hit08_1()
+
+		return _escape
+	else:
+		# タイルがないとき
+		return true

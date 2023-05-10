@@ -26,7 +26,7 @@ var _lever_off_B := false
 func _is_changing_tile()->bool:
 	_lever_off_A = false
 	_lever_off_B = false
-	var _pos:Vector2i = player.get_map_position()
+	var _pos:Vector2i = player.get_map_position(self)
 	var _tiledata:TileData = Commons.get_tile_data(self,_pos)
 	if _tiledata:
 		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
@@ -40,7 +40,7 @@ func _is_changing_tile()->bool:
 
 func _change():
 	if _lever_off_A: # 1回目のレバーオンで 2番目のレバー出現(AlternativeTile)
-		var _pos:Vector2i = player.get_map_position()
+		var _pos:Vector2i = player.get_map_position(self)
 		var _lever_on := GameConstants.Lever_On
 		var _altras = GameConstants.Atras_Coords
 		Commons.replace_cell(self, _pos, GameConstants.Source_Id_Levers, _altras.get(_lever_on))
@@ -52,7 +52,7 @@ func _change():
 		main.play_hit08_1()
 	elif _lever_off_B: # ２回目のレバーオンでドア出現
 		# レバーオンにする
-		var _pos:Vector2i = player.get_map_position()
+		var _pos:Vector2i = player.get_map_position(self)
 		_replace_to_lever_on(_pos)
 		# 『ドア』タイルを出現させる
 		var _door_pos := Vector2i(1,1)
@@ -62,7 +62,7 @@ func _change():
 
 # Playerが動ける条件を記載する
 func _can_move(_dir:Vector2i)->bool:
-	var _meta = player.get_map_position()
+	var _meta = player.get_map_position(self)
 	if _meta:
 		var _current_pos:Vector2i = _meta
 		if _can_escape_from_current_tile(_dir):

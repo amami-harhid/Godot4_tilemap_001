@@ -13,16 +13,13 @@ extends Sprite2D
 
 class_name BasePlayerSprite2D
 
-# プレイヤーのマップ位置
-var _map_position = Vector2i(-1,-1)
-
 # プレイヤーのマップ位置を設定する
-func set_map_position(_pos:Vector2i):
-	_map_position = _pos
+func set_map_position(_tilemap:TileMap, _pos:Vector2i):
+	self.position = _tilemap.map_to_local(_pos)
 
 # プレイヤーのマップ位置を返す
-func get_map_position()->Vector2i:
-	return _map_position
+func get_map_position(_tilemap:TileMap)->Vector2i:
+	return _tilemap.local_to_map(self.position)
 
 # アニメーション（縦）を上向きにする
 func animation_up():

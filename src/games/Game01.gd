@@ -22,7 +22,7 @@ func _process(delta):
 
 # Playerが動ける条件を記載する
 func _can_move(_dir:Vector2i)->bool:
-	var _meta = player.get_map_position()
+	var _meta = player.get_map_position(self)
 	if _meta:
 		var _current_pos:Vector2i = _meta
 		if _can_escape_from_current_tile(_current_pos):
@@ -35,7 +35,7 @@ var _lever_off := false
 # 変化させるタイルの条件
 func _is_changing_tile()->bool:
 	_lever_off = false
-	var _pos:Vector2i = player.get_map_position()
+	var _pos:Vector2i = player.get_map_position(self)
 	var _tiledata:TileData = Commons.get_tile_data(self,_pos)
 	if _tiledata:
 		var _tile_kind:String = Commons.get_tile_data_kind(_tiledata)
@@ -47,7 +47,7 @@ func _is_changing_tile()->bool:
 func _change():
 	if _lever_off:
 		# レバーオンにする
-		var _pos:Vector2i = player.get_map_position()
+		var _pos:Vector2i = player.get_map_position(self)
 		_replace_to_lever_on(_pos)
 		# 『ドア』タイルを出現させる
 		var _door_pos := Vector2i(1,1)
